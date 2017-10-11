@@ -1,11 +1,5 @@
 # Linux Basic Note
 
-主要内容：
-
-- 文件管理
-- 权限管理
-- 网络配置
-
 ## 1 - 启动
 
 Linux 的 7 个启动级别：
@@ -20,7 +14,7 @@ Linux 的 7 个启动级别：
 
 平时常用的只有 3 和 5，破解密码需要用到模式 1。
 
-启动时在 grub 菜单，使用 a/e 命令修改 kernel 一行的参数，在最后加上 1，表示进行模式 1。进入后使用 passwd root 修改 root 密码。
+启动时在 grub 菜单，使用 a/e 命令修改 kernel 一行的参数，在最后加上 1，表示进入模式 1。进入后使用 passwd root 修改 root 密码。
 
 为了防止别人使用这种方法破解 root 密码，可以为 grub 加上密码, 方法是修改 [/etc/grub.conf](./grub.conf) 文件，在 title 上面加上一行 `password --md5 xxxx`，可以用 grub-md5-crypt 命令产生 md5 值。
 
@@ -57,15 +51,17 @@ shell：命令解释器，把命令翻译给内核，广义上是指外围的一
     $ cat /etc/shells
     sh, bash, tcsh, csh, ksh ...
 
-一般 `#` 开头表示 root 用户，`$` 开头表示普通用户。
-
 - ctrl + d：退出的快捷键
 - ctrl + l：清屏
 
-shell 命令的格式：命令 选项 参数
+shell 命令的格式：
+
+    $ 命令 [选项] [参数]
 
 - 选项：-a, --all ...
-- 参数：
+- 参数：一般没有 - 或 -- 前缀，常见的参数是文件名或路径，字符串 ...
+
+命令是主体，选项是影响或微调命令的行为，参数是命令作用的对象。
 
 示例：
 
@@ -73,9 +69,7 @@ shell 命令的格式：命令 选项 参数
     $ date -s 14:28      # -s 是选项，14:28 是参数
     $ date 122513452012  # 只有参数，没有选项
 
-命令是主体，选项是影响或微调命令的行为，参数是命令作用的对象。
-
-ls，显示文件列表，目录也是一种文件。
+ls，显示文件和目录列表 (目录也是一种文件)。
 
 `ls -l`，显示的是 mtime。
 
@@ -83,7 +77,7 @@ ls，显示文件列表，目录也是一种文件。
 - ctime: change time，权限修改时的时间
 - mtime: modify time
 
-自动补全：只有命令和文件可以补全，选项和参数无法补全，自动补全时，如果出现 `/`，说明这是一个目录。
+自动补全：只有命令和文件可以补全，参数和 (非文件的) 选项无法补全，自动补全时，如果出现 `/`，说明这是一个目录。
 
     $ service network restart  # 只有 service 可以补全，network，restart 是参数
 
@@ -169,9 +163,11 @@ shell 优先使用别名，在命令前加个 `\`，则不使用别名。
 
     $ \cp -f /etc/hosts /home/dir1
 
-安全的删除方法 (?)：
+安全的删除方法：
 
-    $ cd xxx && rm -rf zzz
+    $ cd /xxx/yyy && rm -rf zzz
+
+即先确保目录存在，再去删除目录中的文件，删除文件时不要有 `/` 或 `./` 前缀，以免误删掉整个系统盘，如果目录不存在，后面的删除命令不会执行。
 
 **文件内容**
 
@@ -214,7 +210,7 @@ grep：按行正则查找。
     hello tom, how are you!
     555
     666
-    $ grep --color -n '\<tom\>' a.txt
+    $ grep --color -n '\<tom\>' a.txt  # \< 表示匹配单词词首，\> 表示匹配单词词尾
 
     # -A5: after 5 lines
     $ grep --color -A5 'do_rsa1_keygen()' /etc/init.d/sshd
@@ -223,7 +219,7 @@ grep：按行正则查找。
     # -B5: before 5 lines
     $ grep --color -A5 -B5 'do_rsa1_keygen()' /etc/init.d/sshd
 
-    # -C5: after and before 5 lines.
+    # -C5: after and before 5 lines
     $ grep --color -C5 'do_rsa1_keygen()' /etc/init.d/sshd
 
     # 只能一级目录按文件内容搜索
@@ -239,17 +235,18 @@ grep：按行正则查找。
     # 查找不含  do_rsa_keygen 的文件
     $ grep -v 'do_rsa_keygen' /etc
 
-    # -o 参数
-    $ (待补)
+    # -o 参数，截取匹配部分
+    $ grep -o "/static/js/main\.\w\{8\}\.js" build/index.html
+    /static/js/main.ab23ad02.js
 
 粘贴：
 
-- 在 tty1-tty6，用鼠标选中一段文字后，点鼠标右键粘贴；
-- 在 tty7 的终端里，用鼠标选中一段文字后，点击滚轮粘贴；
+- 在 tty1-tty6，用鼠标选中一段文字后，点鼠标右键粘贴
+- 在 tty7 的终端里，用鼠标选中一段文字后，点击滚轮粘贴
 
 显示二进制文件中的字符内容：
 
-    # 打印文件中可打印的内容，可用来提取字符串。
+    # 打印文件中可打印的内容，可用来提取字符串
     > strings /bin/cp
     $FreeBSD: src/bin/cp/utils.c,v 1.46 2005/09/05 04:36:08 csjp Exp $
     $FreeBSD: src/bin/cp/cp.c,v 1.52 2005/09/05 04:36:08 csjp Exp $
@@ -258,6 +255,6 @@ grep：按行正则查找。
     overwrite %s? %s
     ...
 
-**修改文件：vim**
+**vim**
 
 已将此部分内容合并到 vim 的笔记中。

@@ -104,10 +104,7 @@ Linux 目录配置，写得很深入，学习之！(Page 157，图 6-4)
     # pwd -P             // 显示非链接名
     # mkdir -m 711 dir1  // 不使用默认的属性
 
-umask (?)：
-
-    # umask
-    # umask -S
+umask：用来设置文件或目录被创建时的默认权限，默认值是 022，意味着，目录或文件创建时，对 group 和 other users，没有 w (2) 的权限。
 
 查找：which, whereis, locate, find
 
@@ -115,7 +112,7 @@ umask (?)：
 
 - 扇区：sector
 - 柱面：cylinder
-- super block：记录了 inode/block 的使用情况
+- super block：记录了 inode / block 的使用情况
 - inode：每个文件占用一个 inode，记录文件的属性，及文件的数据所在的 block
 - block：记录文件的实际内容
 
@@ -145,7 +142,7 @@ dumpe2fs：
 
     # cat /proc/filesystems
 
-    # df -T  // 同时显示该分区的文件系统
+    # df -T    // 同时显示该分区的文件系统
 
 ln，硬链接与符号链接，彻底理解了。
 
@@ -153,7 +150,7 @@ ln，硬链接与符号链接，彻底理解了。
 
     # fdisk -l
     # df /
-    # fdisk /dev/sda  // 后面跟的是硬盘，而不是分区
+    # fdisk /dev/sda          // 后面跟的是硬盘，而不是分区
 
 格式化
 
@@ -170,8 +167,8 @@ mount / umount
     # vim /etc/fstab
     # vim /etc/mtab
     # cat /proc/filesystems
-    # ls /lib/modules/$(uname -r)/kernel/fs/   // 各 FileSystem 的驱动
-    # mount -o remount,rw,auto /               // 重新以 rw 的属性挂载
+    # ls /lib/modules/$(uname -r)/kernel/fs/    // 各 FileSystem 的驱动
+    # mount -o remount,rw,auto /                // 重新以 rw 的属性挂载
 
 之前说到使用 ln 无法对目录做硬链接，但用 mount 命令却可以做到，如下所示，inode 是一样的。
 
@@ -189,8 +186,8 @@ umount 时若显示 device is busy，说明此时工作目录位于挂载点里�
 
 使用卷标来挂载，好处是不用知道该设备的设备名。
 
-    # dumpe2fs -h /dev/hda6        // 可以用 dumpe2fs 来查询卷标名
-    # mount -L "study" /mnt/study  // 将卷标为 sutdy 的分区挂载到 /mnt/study
+    # dumpe2fs -h /dev/hda6          // 可以用 dumpe2fs 来查询卷标名
+    # mount -L "study" /mnt/study    // 将卷标为 sutdy 的分区挂载到 /mnt/study
 
 磁盘参数修改，不是很明白，mknod。
 
@@ -204,14 +201,14 @@ e2label，修改 label 名。
     # vim /etc/fstab
     Device | mount point | filesystem | parameters | dump(0 or 1) | fsck (0 or 1 or 2)
 
-若不小心改错了 fstab 导致无法正常进入系统，可以进入单用户模式，但此时 / 是 r 属性，所以先重新挂载为 rw 属性，再修改 fstab。
+若不小心改错了 fstab 导致无法正常进入系统，可以进入单用户模式，但此时 `/` 是 r 属性，所以先重新挂载为 rw 属性，再修改 fstab。
 
     # mount -n -o remout,rw /    // -n 表示不写入 /etc/mtab 中。
 
 dd 的妙用：
 
-    # mount -o loop ~/xxx.iso /mnt/xxx                  // 使用 -o loop 挂载虚拟设备文件
-    # dd if=/dev/zero of=/home/loopdev bs=1M count=512  // bs 表示每个 block 的大小。
+    # mount -o loop ~/xxx.iso /mnt/xxx                    // 使用 -o loop 挂载虚拟设备文件
+    # dd if=/dev/zero of=/home/loopdev bs=1M count=512    // bs 表示每个 block 的大小。
     # mkfs -t ext3 /home/loopdev
     # mount -o loop /home/loopdev /media/cdrom
 
@@ -258,7 +255,7 @@ dump，restore，完整备份恢复。
 光盘制作、刻录命令：mkisofs, cdrecord。
 
     # mkisofs -rv -V "linux_file" -o /tmp/system.img -m /home/lost+found -graft-point /root=/root /home=/home /etc=/etc
-    // graft:移花接木
+    // graft：移花接木
     # ll -h /tmp/system.img
     # mount -o loop /tmp/system.img /mnt
     # ll /mnt

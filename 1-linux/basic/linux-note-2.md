@@ -48,7 +48,6 @@
 添加组：
 
     $ groupadd hr
-    $ groupadd sale
     $ groupadd it
     $ groupdel it
     $ userdel user02
@@ -83,7 +82,7 @@
     $ id
     $ whoami
 
-添加或删除用户到组 (?)：
+添加或删除用户到组：
 
     $ gpasswd -a user12 sales
     $ gpasswd -d user12 sales
@@ -136,7 +135,7 @@
     $ chown .hr c.txt
 
     $ chmod u/g/o/a +/-/= r/w/x
-    $ chmod g=rw,o=- c.txt
+    $ chmod g=rw,o=r c.txt
     $ chmod 777 c.txt
     # = chmod 0777 c.txt
 

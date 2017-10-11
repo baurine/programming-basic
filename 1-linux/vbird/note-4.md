@@ -29,11 +29,13 @@ quota，了解即可。
 发警告
 
     # warnquota
+
     // 手动
     # vim /etc/warnquota.conf
     ...
     # vim /etc/cron.daily/warnquota
     /usr/bin/warnquota
+
     // 添加到系统计划任务，自动发邮件提醒
     # chmod 755 /etc/cron.daily/warnquota
 
@@ -141,6 +143,7 @@ ps：
     root      3079  0.0  0.0      0     0 ?        Z    09:10   0:00 [Xsession]
     <defunct>
     ...
+
     # ps aux | grep defunct
     // 查找僵si进程
 

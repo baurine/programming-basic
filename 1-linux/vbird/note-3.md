@@ -7,9 +7,9 @@
     # sh xxx.sh
     # sh -n -x xxx.sh    // 利用 sh 来执行脚本时，可以利用 -n,-x 等 sh 的参数
 
-整个 script 中，除了第一行的 "#!" 是用来声明 shell 的之外，其它的 "#" 都是注释。
+整个 script 中，除了第一行的 `#!` 是用来声明 shell 的之外，其它的 `#` 都是注释。
 
-第一行的 "#!/bin/bash" 用来声明这个 scrpit 用的 shell 名称，当这个程序被执行时，它就能加载对应的 shell 的相关环境配置文件 (一般来说就是 no-login shell，比如 ~/.bashrc)。
+第一行的 `#!/bin/bash` 用来声明这个 scrpit 用的 shell 名称，当这个程序被执行时，它就能加载对应的 shell 的相关环境配置文件 (一般来说就是 no-login shell，比如 ~/.bashrc)。
 
     # declare -i total=$first*$second
     # total=$(($first*$second))
@@ -28,21 +28,21 @@ script 各种执行方式的区别：./script, sh script, source script
 
     # test -e /dmtsai && echo "exist" || echo "not exist"
 
-1. 文件类型判断，如 test -e filename
+1. 文件类型判断，如 `test -e filename`
 
    -e / -f / -d / -b / -c / -S / -p / -L
 
-1. 文件权限检测，如 test -r filename
+1. 文件权限检测，如 `test -r filename`
 
    -r / -w / -x / -u: suid / -g: sgid / -k: sticky / -s: file exist and is not empty
 
-3，两个文件比较，如 test file1 -nt file2
+3，两个文件比较，如 `test file1 -nt file2`
 
       -nt: newer
       -ot: older
       -ef: same inode
 
-4，两个整数的检测，如 test n1 -eq n2
+4，两个整数的检测，如 `test n1 -eq n2`
 
       -eq: equal
       -ne: not equal
@@ -51,7 +51,7 @@ script 各种执行方式的区别：./script, sh script, source script
       -ge: greater than or equal
       -le: less than or euqal
 
-5，判断字符串，如 test -z string
+5，判断字符串，如 `test -z string`
 
       test -z string: return true if string is empty
       test [-n] string: return true if string is not empty
@@ -169,7 +169,7 @@ break, continue。
 
 eval：求值
 
-exec：相当于 fork() + exec()，exec 后面的内容不再执行 ??
+exec：相当于 fork() + exec()，exec 后面的内容不再执行??
 
 exit n：退出时返回退出码 n
 
@@ -185,11 +185,11 @@ expr：将参数作为一个表达式求值，目前一般使用更为有效的 
 
 /etc/passwd
 
-uid: 0--root, 1~499--系统账户
+uid: 0 为 root, 1~499 为系统账户。
 
-/etc/shadow : 密码，9 列
+/etc/shadow：密码，9 列
 
-用户名:密码md5值:最近更改密码的日期:密码不可更改的天数:密码需要重新更改的天数:密码需要更改前的警告天数:密码过期后的账号宽限天数:账号失效日期:保留
+    用户名:密码md5值:最近更改密码的日期:密码不可更改的天数:密码需要重新更改的天数:密码需要更改前的警告天数:密码过期后的账号宽限天数:账号失效日期:保留
 
 有效与初始用户组
 
@@ -202,6 +202,7 @@ uid: 0--root, 1~499--系统账户
     ...
     SKEL=/etc/skel
     ...
+
     # cat /etc/login.defs | egrep -v "^$|^#"
     /etc/default/useradd
     /etc/login.defs
@@ -223,7 +224,7 @@ uid: 0--root, 1~499--系统账户
 修改
 
     # chfn [-foph] username
-    # chsh [-s] //change shell
+    # chsh [-s]    // change shell
 
 新增与删除组
 
@@ -233,26 +234,30 @@ uid: 0--root, 1~499--系统账户
 
 gpasswd：用户组管理员功能
 
-root 用户
+root 用户：
 
-    # gpasswd groupname 
+    # gpasswd groupname
     // 为 group 设密码
+
     # gpasswd [-A user1,user2...] [-M user3,user4...] groupname
     -A: 增加管理员用户
     -M: 增加普通用户
+
     # gpasswd [-rR] groupname
     -r: 将 groupname 密码删除
     -R: 将 groupname 密码栏失效
 
-用户组管理员
+用户组管理员：
 
     # gpasswd [-ad] username groupname
     -a: 将用户添加到组中
     -d: 将用户从组中删除
 
-组成员
+组成员：
 
     # newgrp groupname
+
+### ACL
 
 ACL: Access Control List
 
@@ -262,12 +267,14 @@ ACL: Access Control List
     # vim /etc/fstab
     LABEL=/1 / ext3 defaults,acl 1 1
 
-    # setfacl [-bkRd] [-m|x acl参数] file|folder
-    -m:设置
-    -x:删除
+    # setfacl [-bkRd] [-m|x acl 参数] [file|folder]
+    -m: 设置
+    -x: 删除
+
     # getfacl
     u:[username]:[rwx]
-    // 若[username]为空，则默认表示属主
+    // 若 [username] 为空，则默认表示属主
+
     # setfacl -m u:vbird:rx acl_test1
     # setfacl -m u::rwx acl_test1
     g:[groupname]:[rwx]
@@ -293,9 +300,9 @@ ACL: Access Control List
 
     $ sudo cat /etc/sudoers | egrep -v "^$|^#"
     ...
-    root	ALL=(ALL:ALL) ALL
-    %admin ALL=(ALL) ALL           // % 表示组
-    %sudo	ALL=(ALL:ALL) ALL
+    root    ALL=(ALL:ALL) ALL
+    %admin  ALL=(ALL) ALL           // % 表示组
+    %sudo   ALL=(ALL:ALL) ALL
     ...
     # visudo
 
@@ -319,7 +326,7 @@ pam_cracklib.so: 字典模块
     ubuntu: /lib/i386-linux-gnu/security/*
     # find /lib -name "pam*"
 
-用户信息传递
+**用户信息传递**
 
 查询：w, who, last, lastlog
 
@@ -338,10 +345,14 @@ pam_cracklib.so: 字典模块
 发邮件：mail
 
     # mail user@host -s title
-    # mail   // 查看本用户邮件
-    ?: 帮助
-    看完的邮件会移到 ~/mbox
+    # mail
+    // 查看本用户邮件，看完的邮件会移到 ~/mbox
+
     # mail -f ~/mbox
+
+**手动管理用户**
+
+即手工编辑各个配置文件。
 
 手动新增用户
 

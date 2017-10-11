@@ -73,10 +73,10 @@ htop：top 的替代器。
     $ ll fd          # 文件描述符，文件描述符 0, 1, 2 是每个进程都会生成的，控制输入输出
     $ ll exe
 
-    $ w    # 查看登录用户
-    $ who  # 查看用户
+    $ w              # 查看登录用户
+    $ who            # 查看用户
 
-### 作业控制
+### shell 作业控制
 
 前台和后台的调度：
 
@@ -117,7 +117,7 @@ SSH 远程连接到服务器，即使将程序放到后台，如果自己退出�
 
     $ nohup gedit &
 
-### 管道
+### shell 输入输出，重定向，管道
 
     $ date > date.txt   # 重定向
     $ date >> date.txt
@@ -145,15 +145,15 @@ SSH 远程连接到服务器，即使将程序放到后台，如果自己退出�
 
     $ date > /dev/pts/3
 
-    $ ls /home /fkldsjakfds;a >list.txt         # 标准输出已重定向到了文件，但错误输出仍然打印在终端 上
+    $ ls /home /fkldsjakfds;a >list.txt         # 标准输出已重定向到了文件，但错误输出仍然打印在终端上
     $ ls /home /fdsafdsa >list.txt 2>error.txt  # 将错误输出也重定向
     $ ls /home /fdsafdsa >list.txt 2>&1         # 将标准输出和错误输出都重定向到同一个文件，但注意不能这样写 >list.txt 2>list.txt
     $ ls /home /fdsafdsa &>list.txt             # 上面的另一种写法。
 
 特殊的文件 /dev/null：
 
-    $ ll /dev/null      # 字符设备
-    $ date > /dev/null  # 输出重定向到空设备
+    $ ll /dev/null               # 字符设备
+    $ date > /dev/null           # 输出重定向到空设备
 
     $ ./configure &              # 放到后台的进程照样会往终端输出内容
     $ ./configure &>/dev/null &  # 注意不要写成了 ./configure & &>/dev/null，后台执行，& 一定要放到最后。
@@ -168,6 +168,8 @@ SSH 远程连接到服务器，即使将程序放到后台，如果自己退出�
 **管道**
 
 生产汽车的例子，流水线。
+
+前者的标准输出作为后者的标准输入。只有接受标准输入的命令才可以处于管道的中间或结尾，比如 grep, awk, sed ... 而像 ls, find，它们不能接受标准输入作为参数，就不能处于管道中间或结尾，但可以处于开头提供输出。
 
     $ rpm -qa | grep vim
 
@@ -195,9 +197,9 @@ SSH 远程连接到服务器，即使将程序放到后台，如果自己退出�
 
 周期性的：
 
-    $ ps aux | grep crond  # crond 是计划任务的监视进程，每隔一分钟检测，d 表示 daemon
-    $ service crond stop   # stop crond
-    $ service crond start  # start crond
+    $ ps aux | grep crond     # crond 是计划任务的监视进程，每隔一分钟检测，d 表示 daemon
+    $ service crond stop      # stop crond
+    $ service crond start     # start crond
 
     $ chkconfig crond on      # 设置 crond 开机启动
     $ chkconfig crond --list  # 显示 crond 在各运行级别开机是否运行的情况
@@ -288,7 +290,7 @@ crond：每分钟检查一次。
 
 用户级别的计划任务和系统级别的区别：
 
-1. 用户级别不用在第二列指定用户，因为就是本身，不同用户的用户级别计划任务存放在不同路径。系统级别的计划任务需要在第二列指定运行的用户身份；
+1. 用户级别不用在第二列指定用户，因为就是本身，不同用户的用户级别计划任务存放在不同路径。系统级别的计划任务需要在第二列指定运行的用户身份
 1. 系统级别的计划任务使用了 run-parts 命令，这表示后面跟的是目录，这个功能在用户级别也可以使用
 
 查看计划任务：

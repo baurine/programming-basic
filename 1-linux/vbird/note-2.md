@@ -46,8 +46,13 @@ PS1, PS2, PS3, $, ?
     # declare [enviroment_var]
 
     # declare [-aixr] [+x] [-p] var_name
-    // -a:array, -i:interger, -x:change to enviroment variable
-    // -r:readonly, +x:change to user defined variable, -p:show type
+    -a: array
+    -i: interger
+    -x: change to enviroment variable
+    +x: change to user defined variable
+    -r: readonly
+    -p: show type
+
     # sum=10+20
     # echo $sum
     10+20
@@ -110,9 +115,9 @@ read：
 
 登录信息：
 
-    /etc/issue      // 用户登录前的欢迎信息
-    /etc/issue.net  // 通过 telnet 登录前的欢迎信息
-    /etc/motd       // 用户登录后的欢迎信息
+    /etc/issue        // 用户登录前的欢迎信息
+    /etc/issue.net    // 通过 telnet 登录前的欢迎信息
+    /etc/motd         // 用户登录后的欢迎信息
 
 bash 的环境配置文件：
 
@@ -162,7 +167,7 @@ nologin shell：仅读取 ~/.bashrc
 bash 通配符与特殊符号：
 
 - 通配符：* ? [] [-] [^]
-- 特殊符号：# \ | ; ~ $ & ! / >,>> <,<< '' "" `` () {}
+- 特殊符号：# \ | ; ~ $ & ! / > >> < << '' "" `` () {}
 
 输入重定向：`<`, `<<`。`<<` 表示结束输入的意思。
 
@@ -197,21 +202,21 @@ cut 比较少用，awk 功能比 cut 强大。
 
 排序命令：sort，uniq，wc
 
-    sort [-tkrnfbMu] filename|stdin // -kntr 常用
-    -t:分隔符，默认是 \t 分隔
-    -n:以数值排序，默认以字符排序
-    -k:以第几列排序
-    -r:逆序
-    -u:uniq，相同记录仅显示一行
+    sort [-tkrnfbMu] filename|stdin    // -kntr 常用
+    -t: 分隔符，默认是 \t 分隔
+    -n: 以数值排序，默认以字符排序
+    -k: 以第几列排序
+    -r: 逆序
+    -u: uniq，相同记录仅显示一行
 
     uniq [-ic]
-    -i:忽略大小写
-    -c:统计
+    -i: 忽略大小写
+    -c: 统计
 
     wc [-lwm]
-    -l:line
-    -w:work
-    -m:characters
+    -l: line
+    -w: work
+    -m: characters
 
     $ last | cut -d ' ' -f1 | sort | uniq -c | sort -nr -k1
      28 sparkle
@@ -232,15 +237,16 @@ tee：双向重定向，即将结果同时输到出 stdout 和文件。
 文件切割命令：split
 
     # split [-bl] filename prefix
-    -b:按大小
-    -l:按行数
+    -b: 按大小
+    -l: 按行数
 
 参数代换：xargs，产生命令所需要参数，主要用在管道里，为那些非管道命令比如　ls，也可以使用管道。
 
-    xargs [-0epn] command
+    # xargs [-0epn] command
+
     # find /sbin -perm +7000 | xargs ls -l
 
-`-` 的作用：作为 stdout 或　stdin
+`-` 的作用：作为 stdout 或　stdin。
 
     # ls -al / | split -l 10 - lsroot
     # wc -l lsroot*
@@ -275,11 +281,11 @@ sed 工具：主要对整行进行操作。
     # nl sed_test | sed '$a drink tea'
     # nl sed_test | sed '2i drink tea'
     # nl sed_test | sed '2-5c No 2-5 number'
-    # nl sed_test | sed '1,$s/old/new/g' 
+    # nl sed_test | sed '1,$s/old/new/g'
     // 注意，在 sed 里不能用 % 替代 1,$
-    # sed '1,$s/$/\./g' sed_test 
+    # sed '1,$s/$/\./g' sed_test
     // 结果显示在 stdout 上
-    # sed -i '1,$/\.$/\!/g' sed_test 
+    # sed -i '1,$/\.$/\!/g' sed_test
     // 直接修改原文件内容，不显示在 stdout
 
 扩展正则表达式：
@@ -316,7 +322,7 @@ awk 默认以空格和 tab 分隔
     awk 'conditon1 {action1} condition2 {action2}'
     # last -n 5 | awk '{print $1 "\t" $3}'
     # cat /etc/passwd | awk '{FS=":"} $3<10 {print $1 "\t" $3}'
-    # cat /etc/passwd | awk 'BEGIN {FS=":"} $3<10 {print $1 "\t" $3}' 
+    # cat /etc/passwd | awk 'BEGIN {FS=":"} $3<10 {print $1 "\t" $3}'
     # cat /etc/passwd | awk -F: '$3<10 {print $1"\t"$3}'
 
 变量：$0, $1, $2 ... NF, NR, FS ...
@@ -341,7 +347,7 @@ awk 默认以空格和 tab 分隔
     # diff passwd.old passwd.new
 
     # cmp [-s] file1 file2   // 按字节比较
-    -s:显示所有不同的地方，默认只显示第一个
+    -s: 显示所有不同的地方，默认只显示第一个
 
     # patch
     # diff -Naur passwd.old passwd.new > passwd.patch

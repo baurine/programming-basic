@@ -48,12 +48,12 @@ DNS，如果不通过名字访问， 是不需要 DNS 的。
     Unicast reply from 192.168.0.10 [00:E0:1C:3E:7B:C5]  0.626ms
     Unicast reply from 192.168.0.10 [00:B0:C4:01:27:F6]  0.717ms
 
-临时设一个 ip 地址：
+临时设置一个 ip 地址：
 
     # 这个命令是临时的，重新启动网络服务就消失了，而且用 ifconfig 命令查看是看不见的。
     $ ip addr add dev eth0 192.168.0.10/24
 
-如果要让 ifconfig 命令能看到，使用来临时设置一个 ip：
+如果要让 ifconfig 命令能看到，则使用 ifconfig 来临时设置一个 ip：
 
     $ ifconfig eth0 192.168.1.132
 
@@ -70,7 +70,7 @@ DNS，如果不通过名字访问， 是不需要 DNS 的。
 
     $ service network restart  # 以上临时设置的就消失了
 
-今天 (2013/4) 遇到了一个问题，机器上有两个网卡，两个ip。192.168.1.131 (eth1) 和 192.168.1.132 (eth0)，前者连外网，后者连开发板。一开始都用着后者和开发板通信，今天要用前者和外网通信，但死活连不上外网，用 ping 命令 ping 外网，显示源地址是 192.168.1.132。
+今天 (2013/4) 遇到了一个问题，机器上有两个网卡，两个 ip。192.168.1.131 (eth1) 和 192.168.1.132 (eth0)，前者连外网，后者连开发板。一开始都用着后者和开发板通信，今天要用前者和外网通信，但死活连不上外网，用 ping 命令 ping 外网，显示源地址是 192.168.1.132。
 
 用 `route -n` 查看，最后一列 Iface 的值是 eth0。看来问题是出在路由上。
 
@@ -136,7 +136,7 @@ SSH 协议 (Secure xxx)，传输是加密的。
 示例：
 
     $ ps aux | grep sshd
-    $ netstat -tnlp        # t: tcp, l: listen, p: pid, n: 不要反解
+    $ netstat -tnlp                # t: tcp, l: listen, p: pid, n: 不要反解
     $ service sshd status
 
     $ ssh root@192.168.0.10
@@ -177,16 +177,16 @@ tftp-server 依赖于 xinetd (超级守护进程)。
     $ vim /etc/xinetd.d/tftp
     service tftp
     {
-            socket_type             = dgram
-            protocol                = udp
-            wait                    = yes
-            user                    = root
-            server                  = /usr/sbin/in.tftpd
-            server_args             = -s /tftpboot  # 共享目录
-            disable                 = yes           # 改为 no 启用 tftp
-            per_source              = 11
-            cps                     = 100 2
-            flags                   = IPv4
+        socket_type             = dgram
+        protocol                = udp
+        wait                    = yes
+        user                    = root
+        server                  = /usr/sbin/in.tftpd
+        server_args             = -s /tftpboot  # 共享目录
+        disable                 = yes           # 改为 no 启用 tftp
+        per_source              = 11
+        cps                     = 100 2
+        flags                   = IPv4
     }
 
 配置完成后，不是重启 tftp-server 进程，只是把上级进程，即 xinetd 进程重启。
@@ -237,9 +237,9 @@ tftp-server 依赖于 xinetd (超级守护进程)。
 ftp 服务器：
 
 - 服务器软件包：vsftpd (vs:very safe)
+- 客户端：ftp, lftp (两者的区别仅在于前者没有自动补全功能，而后者有，所以推荐使用后者)
 - 配置文件：/etc/vsftpd/vsftpd.conf
 - 端口：20/tcp，21/tcp
-- 客户端：ftp, lftp (两者的区别仅在于前者没有自动补全功能，而后者有，所以推荐使用后者)
 
 安装使用：
 
