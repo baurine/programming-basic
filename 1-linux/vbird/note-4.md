@@ -1,6 +1,6 @@
 # 鸟哥的 Linux 私房菜基础学习篇 (第三版) 读书笔记
 
-## 第 15 章 磁盘配额和高级文件系统管理
+## 第 15 章 - 磁盘配额和高级文件系统管理
 
 quota，了解即可。
 
@@ -92,11 +92,11 @@ PE: Physical Extent
 
 LVM 的系统快照，可用于快速恢复系统。
 
-## 第 16 章 crontab
+## 第 16 章 - crontab
 
 略。
 
-## 第 17 章 进程管理和 SELinux
+## 第 17 章 - 进程管理和 SELinux
 
     # jobs [-lrs]
     # nohup ...
@@ -259,7 +259,7 @@ SELinux的三种模式：enforcing, permissive, diabled
     # semanage ...
     ...
 
-## 第 18 章 daemons
+## 第 18 章 - daemons
 
 daemon 与 service: daemon 程序提供 service 服务。可视为相同。
 
@@ -325,7 +325,7 @@ Linux 开机流程：
 1. 依据 init 的设置进行 daemon start (/etc/rc.d/rc[0-6].d/*)
 1. 加载本机设置 (/etc/rc.d/rc.local)
 
-## 第 19 章 系统日志
+## 第 19 章 - 系统日志
 
 logrotate 的设置
 

@@ -1,6 +1,6 @@
 # 鸟哥的 Linux 私房菜基础学习篇 (第三版) 读书笔记
 
-## 第 11 章 bash
+## 第 11 章 - bash
 
     # type [-tpa] command
 
@@ -251,7 +251,7 @@ tee：双向重定向，即将结果同时输到出 stdout 和文件。
     # ls -al / | split -l 10 - lsroot
     # wc -l lsroot*
 
-## 第 12 章 正则表达式
+## 第 12 章 - 正则表达式
 
 基本正则表达式，略。
 

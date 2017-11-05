@@ -90,7 +90,7 @@ shutdown 比其它命令灵活的地方在于，可以设定重启或关机发�
 
     # fsck /dev/sda1  // 扫描修复磁盘
 
-## 第 6 章 权限、目录
+## 第 6 章 - 权限、目录
 
 语言配置文件：/etc/sysconfig/i18n
 
@@ -108,7 +108,7 @@ umask：用来设置文件或目录被创建时的默认权限，默认值是 02
 
 查找：which, whereis, locate, find
 
-## 第 8 章 磁盘与文件系统管理
+## 第 8 章 - 磁盘与文件系统管理
 
 - 扇区：sector
 - 柱面：cylinder
@@ -238,7 +238,7 @@ fdisk 分区只支持 2TB 以下的硬盘，足够用了，若要想对 2TB 以�
 
     # parted 设备名 [选项]
 
-## 第 9 章 打包与压缩
+## 第 9 章 - 打包与压缩
 
 compress, gzip, zcat, bzip2, bzcat, tar
 
@@ -265,6 +265,6 @@ dd, cpio
 
     # dd if=/dev/hda1 of=/tmp/boot.img bs=512 count=1    // 拷贝第一个扇区
 
-## 第 10 章 vim
+## 第 10 章 - vim
 
 略。

@@ -134,3 +134,24 @@ monitrc 中的具体语法就要看文档了。
         // 文档上说，如果指定了 -g，那么 all 参数其实不是必需的
 
    重启 restart = stop + start
+
+## su & sudo
+
+(2017/10/5)
+
+Resources:
+
+1. [sudo 命令](http://man.linuxde.net/sudo)
+1. [深入理解 sudo 与 su 之间的区别](https://linux.cn/article-8404-1.html)
+1. [Linux 的 su 與 sudo 指令教學與範例](https://blog.gtwang.org/linux/sudo-su-command-tutorial-examples/)
+
+su: substitute user.
+
+su 用来从一个用户切换到另一个用户，默认是切换到 root 用户，然后就一直使用新用户的身份执行各种操作，直到执行 exit，但也支持切换到新用户后只执行一条 shell 命令后就回到原来的用户 (即 sudo 的默认行为)。
+
+sudo 也用来从一个用户切换到另一个用户，默认也是切换到 root 用户。但它默认是以目标用户的身份执行一条 shell 命令后就回到原来的用户身份。sudo 也支持切换到新用户后，停留在新用户的身份，直到执行 exit 命令 (即 su 的默认行为)。
+
+su 和 sudo 的最大区别：
+
+1. 当切换到 root 用户时，su 命令需要输入 root 用户的密码，而 sudo 命令需要输入的是用户自己本身的密码，无须知道 root 用户的密码。
+1. 使用 su 命令，任何用户都可以切换到 root 用户，只要它知道 root 用户的密码。而 sudo 命令，为什么它不需要知道 root 用户的密码，是因为不是所有用户都可以使用 sudo 切换到 root 用户，只有被 root 用户授权过允许切换的用户，才可以切换，这相当于一种信任，所以这就是为什么 sudo 命令输入的是自己的密码。

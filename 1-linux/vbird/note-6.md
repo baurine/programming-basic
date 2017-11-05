@@ -1,6 +1,6 @@
 # 鸟哥的 Linux 私房菜基础学习篇 (第三版) 读书笔记
 
-## 第 23 章 软件安装
+## 第 23 章 - 软件安装
 
     distribution   机制   本地命令       在线机制 (命令)
     redhat/fedora  RPM   rpm,rpmbuild  YUM (yum)
@@ -168,7 +168,7 @@ yum 组功能
 
     # yum [grouplist|groupinfo|groupinstall|groupremove]
 
-## 第 24 章 X Window
+## 第 24 章 - X Window
 
 X11 --> X11R6 --> X11R6.3 --> XFree86 (X + Free Software + x86) --> Xorg --> X11R6.8 --> X11R7 ...
 
@@ -229,11 +229,11 @@ X Server 会读取 /etc/X11/xorg.conf
 
 - 显卡芯片组：/usr/lib/xorg/modules/drivers/
 
-## 第 25 章 备份策略
+## 第 25 章 - 备份策略
 
 略。
 
-## 第 26 章 内核编译与管理
+## 第 26 章 - 内核编译与管理
 
     # make mrproper
     # make clean

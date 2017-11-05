@@ -1,6 +1,6 @@
 # 鸟哥的 Linux 私房菜基础学习篇 (第三版) 读书笔记
 
-## 第 13 章 shell script
+## 第 13 章 - shell script
 
     # ll /bin/sh         // sh 是 bash 的符号链接
     # bash xxx.sh
@@ -179,7 +179,7 @@ expr：将参数作为一个表达式求值，目前一般使用更为有效的 
 
     x=`expr $x+1` ==> x=$(expr $x+1) ==> x=$(($x+1))
 
-## 第 14 章 账号管理与 ACL
+## 第 14 章 - 账号管理与 ACL
 
 了解即可。
 
