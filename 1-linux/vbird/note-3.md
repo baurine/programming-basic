@@ -308,7 +308,7 @@ ACL: Access Control List
 
 其余的规则配置都好复杂，平时也用不到，了解一下即可。
 
-特殊的shell：/sbin/nologin
+特殊的 shell：/sbin/nologin
 
     # vim /etc/nologin.txt
     $ su - nologinuser

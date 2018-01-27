@@ -240,11 +240,23 @@ tee：双向重定向，即将结果同时输到出 stdout 和文件。
     -b: 按大小
     -l: 按行数
 
-参数代换：xargs，产生命令所需要参数，主要用在管道里，为那些非管道命令比如　ls，也可以使用管道。
+**xargs**
+
+xargs，参数代换，产生命令所需要参数，主要用在管道里，为那些非管道命令比如　ls，也可以使用管道。
 
     # xargs [-0epn] command
 
     # find /sbin -perm +7000 | xargs ls -l
+
+上面这条命令的意思是，先通过 find 命令找到一些文件路径，这些文件路径作为输出参数，xargs 接收这些文件路径，对每一个文件路径，都调用 ls 命令，并将这些文件路径作为 ls 命令的参数。
+
+上面这条命令也相当于：
+
+    # find /sbin -perm +7000 -exec ls -l {} \;
+
+所以 xargs 常用在 find 命令中替代 "-exec {} \;"。
+
+[参考](http://wiki.jikexueyuan.com/project/shell-learning/xargs.html)
 
 `-` 的作用：作为 stdout 或　stdin。
 

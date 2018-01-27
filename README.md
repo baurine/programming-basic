@@ -54,3 +54,7 @@ Some note about programming basic.
     * 第 24 章 - X Window
     * 第 25 章 - 备份策略 (略)
     * 第 26 章 - 内核编译与管理
+
+## Resources
+
+- [Linux 工具快速教程](https://github.com/me115/linuxtools_rst)

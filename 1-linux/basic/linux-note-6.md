@@ -147,6 +147,8 @@ SSH 协议 (Secure xxx)，传输是加密的。
 
 文件传输：
 
+    $ scp [参数] [原路径] [目标路径]
+
     $ scp -r /etc/hosts 192.168.0.10:/tmp/
     $ scp -r root@192.168.0.10:/etc/services /var/tmp/
     $ rsync -a /etc/hosts 192.168.0.10:/tmp/
