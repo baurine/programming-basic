@@ -25,6 +25,7 @@ Some note about programming basic.
   * [Linux Note 7](./1-linux/basic/linux-note-7.md)
     * Monit
     * su & sudo
+    * ssh
 * 鸟哥的 Linux 私房菜笔记
   * [Chapter 1 - 10](./1-linux/vbird/note-1.md)
     * 第 1 - 2 章
