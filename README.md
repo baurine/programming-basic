@@ -55,6 +55,7 @@ Some note about programming basic.
     * 第 24 章 - X Window
     * 第 25 章 - 备份策略 (略)
     * 第 26 章 - 内核编译与管理
+* [算法](./2-algorithm/algorithm.md)
 
 ## Resources
 

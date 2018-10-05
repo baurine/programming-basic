@@ -16,4 +16,4 @@
   * [Chapter 15 - 19](./1-linux/vbird/note-4.md)
   * [Chapter 20 - 22](./1-linux/vbird/note-5.md)
   * [Chapter 23 - 26](./1-linux/vbird/note-6.md)
-
+* [算法](./2-algorithm/algorithm.md)
